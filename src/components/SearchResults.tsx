@@ -7,10 +7,13 @@ function SearchResults(props: {submittedQuery: string}) {
     if(props.submittedQuery.length > 0){
       getUser(props.submittedQuery);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.submittedQuery]);
 
   const [user, setUser] = useState({});
+  // const [userFollowers, setUserFollowers] = useState();
   const [userFollowersCount, setUserFollowersCount] = useState();
+  const [userRepos, setUserRepos] = useState();
   const [userReposCount, setUserReposCount] = useState();
   
   async function getUser(username:string) {
@@ -27,23 +30,38 @@ function SearchResults(props: {submittedQuery: string}) {
       followersURL = res.items[0].followers_url;
       reposURL = res.items[0].repos_url;
       setUser(res.items[0]);
-    })
+    });
 
     const userFollowersRes = await fetch(followersURL, {
       method: "GET",
       headers: {
         Authorization: `${token}` 
       }
-    })
-    userFollowersRes.json().then(res => setUserFollowersCount(res.length));
+    });
+    userFollowersRes.json().then(res => {
+      // setUserFollowers(res);
+      setUserFollowersCount(res.length);
+    });
 
     const userReposRes = await fetch(reposURL, {
       method: "GET",
       headers: {
         Authorization: `${token}` 
       }
-    })
-    userReposRes.json().then(res => setUserReposCount(res.length));
+    });
+    userReposRes.json().then(res => {
+      setUserRepos(res);
+      setUserReposCount(res.length);
+      orderReposByLatest(res);
+    });
+  }
+
+  function orderReposByLatest(repos){
+    let arrSorted = repos.sort((a, b) => 
+      b.id - a.id //id are used as a proxy for creation date
+    );
+    arrSorted = arrSorted.slice(0, 4);
+    setUserRepos(arrSorted);
   }
 
   return (
@@ -67,6 +85,18 @@ function SearchResults(props: {submittedQuery: string}) {
           Repository Count:
         </h4>
         {userReposCount && userReposCount}
+      </div>
+      <div>
+        <h3>Most Recent Repositories:</h3>
+        {userRepos && userRepos.map(repo => {
+          return (
+            <div key={repo.id}>
+              <p>{repo.name}</p>
+              <p>{repo.language}</p>
+              <a href={repo.html_url}>{repo.html_url}</a>
+            </div>
+          )
+        })}
       </div>
     </>
   )
