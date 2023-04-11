@@ -1,3 +1,5 @@
+import SearchBar from "./components/SearchBar";
+
 function App() {
   return (
     <div className="App">
@@ -6,6 +8,9 @@ function App() {
           Github Profile Viewer
         </h1>
       </header>
+      <body>
+        <SearchBar />
+      </body>
     </div>
   );
 }
