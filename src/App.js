@@ -8,9 +8,7 @@ function App() {
           Github Profile Viewer
         </h1>
       </header>
-      <body>
         <SearchBar />
-      </body>
     </div>
   );
 }
