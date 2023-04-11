@@ -11,12 +11,12 @@ function SearchResults(props: {submittedQuery: string}) {
   }, [props.submittedQuery]);
 
   const [user, setUser] = useState({});
-  // const [userFollowers, setUserFollowers] = useState();
   const [userFollowersCount, setUserFollowersCount] = useState();
   const [userRepos, setUserRepos] = useState();
   const [userReposCount, setUserReposCount] = useState();
   
   async function getUser(username:string) {
+    let usernameFound = true;
     let followersURL;
     let reposURL;
 
@@ -27,33 +27,39 @@ function SearchResults(props: {submittedQuery: string}) {
       }
     });
     await userRes.json().then(res => {
+      if(res.total_count === 0) {
+        usernameFound = false;
+        alert(`${username} was not found`);
+        return;
+      }
       followersURL = res.items[0].followers_url;
       reposURL = res.items[0].repos_url;
       setUser(res.items[0]);
     });
 
-    const userFollowersRes = await fetch(followersURL, {
-      method: "GET",
-      headers: {
-        Authorization: `${token}` 
-      }
-    });
-    userFollowersRes.json().then(res => {
-      // setUserFollowers(res);
-      setUserFollowersCount(res.length);
-    });
-
-    const userReposRes = await fetch(reposURL, {
-      method: "GET",
-      headers: {
-        Authorization: `${token}` 
-      }
-    });
-    userReposRes.json().then(res => {
-      setUserRepos(res);
-      setUserReposCount(res.length);
-      orderReposByLatest(res);
-    });
+    if(usernameFound){
+      const userFollowersRes = await fetch(followersURL, {
+        method: "GET",
+        headers: {
+          Authorization: `${token}` 
+        }
+      });
+      userFollowersRes.json().then(res => {
+        setUserFollowersCount(res.length);
+      });
+  
+      const userReposRes = await fetch(reposURL, {
+        method: "GET",
+        headers: {
+          Authorization: `${token}` 
+        }
+      });
+      userReposRes.json().then(res => {
+        setUserRepos(res);
+        setUserReposCount(res.length);
+        orderReposByLatest(res);
+      });
+    }
   }
 
   function orderReposByLatest(repos){
