@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
-import token from '../secrets.js'
+const token = process.env.REACT_APP_TOKEN
 
 function SearchResults(props: {submittedQuery: string}) {
   useEffect(() => {
