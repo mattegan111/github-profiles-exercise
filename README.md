@@ -7,11 +7,11 @@ This app was built as an exercise. It connects to the Github API and allows the 
 ## The Brief
 
 ### User Stories:
-- [ ] User can enter a username
-- [ ] User can click on search button to retrieve information
-- [ ] User can see the avatar, username, followers and repository count of searched user
-- [ ] User can see the top 4 repositories of searched user
-- [ ] User should get an alert if the username is not valid
+- [x] User can enter a username
+- [x] User can click on search button to retrieve information
+- [x] User can see the avatar, username, followers and repository count of searched user
+- [x] User can see the top 4 repositories of searched user
+- [x] User should get an alert if the username is not valid
 
 ### Bonus Features:
 - [ ] User can toggle light/dark mode
