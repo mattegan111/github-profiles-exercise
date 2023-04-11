@@ -3,7 +3,7 @@ import {useState} from 'react'
 function SearchBar() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     alert(`Submitted value: ${searchQuery}`)
   }
