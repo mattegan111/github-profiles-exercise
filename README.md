@@ -1,5 +1,7 @@
 # Github Profiles
 
+Deployed here: https://github-profiles-by-mattegan111.netlify.app/
+
 This app was built as an exercise. It connects to the Github API and allows the user to search for a specific user, then view information about that user.
 
 ## The Brief
