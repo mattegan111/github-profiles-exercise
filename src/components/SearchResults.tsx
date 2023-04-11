@@ -1,13 +1,8 @@
-//@ts-nocheck
+// @ts-nocheck
 import { useState, useEffect } from "react";
 const token = process.env.REACT_APP_TOKEN
 
 function SearchResults(props: {submittedQuery: string}) {
-  interface userType {
-    avatar_url: string, 
-    login: string 
-  }
-
   useEffect(() => {
     if(props.submittedQuery.length > 0){
       getUser(props.submittedQuery);
@@ -15,15 +10,15 @@ function SearchResults(props: {submittedQuery: string}) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.submittedQuery]);
 
-  const [user, setUser] = useState<userType | {}>({});
+  const [user, setUser] = useState({});
   const [userFollowersCount, setUserFollowersCount] = useState();
-  const [userRepos, setUserRepos] = useState<Array<any>| undefined>();
+  const [userRepos, setUserRepos] = useState();
   const [userReposCount, setUserReposCount] = useState();
   
   async function getUser(username:string) {
     let usernameFound = true;
-    let followersURL : string = '';
-    let reposURL : string = '';
+    let followersURL;
+    let reposURL;
 
     const userRes = await fetch(`https://api.github.com/search/users?q=${username}`, {
       method: "GET",
@@ -67,7 +62,7 @@ function SearchResults(props: {submittedQuery: string}) {
     }
   }
 
-  function orderReposByLatest(repos : Array<any>){
+  function orderReposByLatest(repos){
     let arrSorted = repos.sort((a, b) => 
       b.id - a.id //id are used as a proxy for creation date
     );
