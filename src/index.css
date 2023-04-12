@@ -15,6 +15,46 @@ h3 {
 
 .App {
   padding: 0px 20px 0px 20px;
+  width: calc(100vw - 40px);
+  height: calc(100vh);
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dark {
+  background-color: #4b4b4b;
+  color: white;
+}
+
+.light {
+  background-color: #ffffff;
+}
+
+.theme-button {
+  height: 40px;
+  width: 50px;
+
+  font-size: 14px;
+  line-height: 20px;
+  color: #24292e;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+
+.theme-button:hover {
+  background-color: #f3f4f6;
+  border-color: #1b1f2326;
+  transition-duration: 0.1s;
+  cursor: pointer;
 }
 
 code {
