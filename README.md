@@ -25,3 +25,4 @@ This app was built as an exercise. It connects to the Github API and allows the 
 - [ ] Convert all Javascript to Typescript
 - [ ] Implement Redux, and then...
 - [ ] Modularise components
+- [ ] CSS file for each component
