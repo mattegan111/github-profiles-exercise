@@ -14,5 +14,14 @@ This app was built as an exercise. It connects to the Github API and allows the 
 - [x] User should get an alert if the username is not valid
 
 ### Bonus Features:
-- [ ] User can toggle light/dark mode
-- [ ] Selected mode should persist when user comes back to the app again
+- [x] User can toggle light/dark mode
+- [x] Selected mode should persist when user comes back to the app again
+
+### Other Todos:
+- [ ] Add form validation
+- [ ] Load all API data before displaying on page
+- [ ] Add loading spinner
+- [ ] Use a code linter
+- [ ] Convert all Javascript to Typescript
+- [ ] Implement Redux, and then...
+- [ ] Modularise components
