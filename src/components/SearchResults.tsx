@@ -75,40 +75,47 @@ function SearchResults(props: {submittedQuery: string}) {
   }
 
   return (
-    <>
-      <div>
-        <h4>
-          Avatar:
-        </h4>
+    <div className="horizontal-align search-results">
+      <div className="padding-sm min-width-150">
         {user.avatar_url &&
           <img src={user.avatar_url} alt="User Avatar" width="100px"></img>
         }
-        <h4>
-          Username:
-        </h4>
-        {user.login && user.login}
-        <h4>
-          Followers:
-        </h4>
-        {userFollowersCount && userFollowersCount}
-        <h4>
-          Repository Count:
-        </h4>
-        {userReposCount && userReposCount}
+        <h3>
+          {user.login && user.login}
+        </h3>
+        <p>
+          {userFollowersCount && 
+            <p>{userFollowersCount} Followers</p>
+          }
+        </p>
+        <p>
+          {userReposCount && 
+            <p>{userReposCount} Repositories</p>
+          }
+        </p>
       </div>
-      <div>
-        <h3>Most Recent Repositories:</h3>
-        {userRepos && userRepos.map(repo => {
-          return (
-            <div key={repo.id}>
-              <p>{repo.name}</p>
-              <p>{repo.language}</p>
-              <a href={repo.html_url}>{repo.html_url}</a>
-            </div>
-          )
-        })}
+      <div className="padding-sm min-width-330">
+        {userRepos && 
+          <>
+            <h3>Most Recent Repositories:</h3>
+            {userRepos.map(repo => {
+              return (
+                <div key={repo.id}>
+                  <p>
+                    {repo.language &&
+                      <p><a href={repo.html_url}>{repo.name}</a>, in {repo.language}</p>
+                    }
+                    {!repo.language &&
+                      <p>{repo.name}</p>
+                    }
+                  </p>
+                </div>
+              )
+            })}
+          </>
+        }
       </div>
-    </>
+    </div>
   )
 }
 
