@@ -11,21 +11,21 @@ function SearchBar() {
   }
 
   return (
-    <>
-      <h2>Search for a user:</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Github username:
+    <div>
+      <div>
+        <form onSubmit={handleSubmit}>
           <input 
             type="text" 
+            placeholder="Search for a user..."
             value={searchQuery} 
             onChange={(e) => setSearchQuery(e.target.value)}
+            className="form-input"
           />
-        </label>
-        <input type="submit" value="Search" />
-      </form>
-    <SearchResults submittedQuery={submittedQuery} />
-    </>
+          <input type="submit" value="Search" className="form-button"/>
+        </form>
+      </div>
+      <SearchResults submittedQuery={submittedQuery} />
+    </div>
   );
 }
 
